@@ -19,6 +19,7 @@ def model_fn(features: Dict[str, tf.Tensor], labels: tf.Tensor, mode: str, param
     rnn_layers = params.get("rnn_layers", 3)
 
     embeddings = tf.Variable(tf.random.normal(shape=(len(vocab), 8), dtype=tf.float32), name="embeddings")
+    
 
     encoded_strings = tf.nn.embedding_lookup(embeddings, encoded_text)
 
