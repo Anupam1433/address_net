@@ -18,7 +18,8 @@ def model_fn(features: Dict[str, tf.Tensor], labels: tf.Tensor, mode: str, param
     rnn_size = params.get("rnn_size", 128)
     rnn_layers = params.get("rnn_layers", 3)
 
-    embeddings = tf.Variable("embeddings", dtype=tf.float32, initializer=tf.random_normal(shape=(len(vocab), 8)))
+    embeddings = tf.Variable(tf.random.normal(shape=(len(vocab), 8), dtype=tf.float32), name="embeddings")
+
     encoded_strings = tf.nn.embedding_lookup(embeddings, encoded_text)
 
     logits, loss = nnet(encoded_strings, lengths, rnn_layers, rnn_size, labels, mode == tf.estimator.ModeKeys.TRAIN)
